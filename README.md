@@ -76,7 +76,7 @@ Expense deleted successfully 1
 
 ---
 
-### 📊 Viewing a Monthly Summary
+### Viewing a Monthly Summary
 
 ```
 summary --month 3
