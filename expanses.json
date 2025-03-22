@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "date": "22-03-2025",
+        "description": "food",
+        "amount": 15
+    },
+    {
+        "id": 2,
+        "date": "22-03-2025",
+        "description": "groceries",
+        "amount": 30
+    },
+    {
+        "id": 2,
+        "date": "22-02-2025",
+        "description": "groceries",
+        "amount": 50
+    }
+]
