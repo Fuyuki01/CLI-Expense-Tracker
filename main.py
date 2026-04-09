@@ -1,7 +1,8 @@
 import json
 import os
-import argparse
+import sys
 import datetime, calendar
+import MainWindow
 
 expanses_list = "expanses.json"
 
@@ -74,51 +75,12 @@ def delete_expanse(id):
 
 
 def main():
-    while True:
-        command = input("$ ").strip().split(" ", 1)
+    app = MainWindow.QApplication(sys.argv)
 
-        if not command:
-            continue
-        
-        action = command[0]
+    window = MainWindow.MainWindow()
 
-        if action == "list":
-            expanses = list_all_expenses()
-            print(f"{'ID':<4} {'Date':<12} {'Description':<25} {'Amount':>6}")
-            print("-" * 60)
-            for expanse in expanses:
-                print(f"{expanse['id']:<4} {expanse['date']:<12} {expanse['description']:<25} ${expanse['amount']:>4}")
-        elif action == "summary":
-            if len(command) > 1:
-                parse = argparse.ArgumentParser(prog="summary", add_help=False)
-                parse.add_argument("--month", type=int, help="month to calculate the summary")
-                try:
-                    args = parse.parse_args(command[1].split())
-                    summary(args.month)
-                except Exception as e:
-                    print("Usage: summary --month 5")
-                    print("Error:", e)
-            else:
-                print(f"${summary()}")
-        elif action == "add":
-            add_parser = argparse.ArgumentParser(prog="add",add_help=False)
-            add_parser.add_argument("--description", required=True, help="Description of the expanse")
-            add_parser.add_argument("--amount", type= int, required=True, help="Amount of the expanse")
-            try:
-                args = add_parser.parse_args(command[1].split())
-                add_expanse(args.description, args.amount)
-            except:
-                print("Usage: add --description \"Lunch\" --amount 20")
-        elif action == "remove":
-            parser = argparse.ArgumentParser(prog="remove", add_help=False)
-            parser.add_argument("--id", type=int, required=True, help="ID of the expanse")
-            try:
-                args = parser.parse_args(command[1].split())
-                delete_expanse(args.id)
-            except:
-                print("Usage: remove --id 2")
-        elif action in ["clear", "leave", "quit"]:
-            break
+    window.show()
+    app.exec()
 
 
 if __name__ == "__main__":
