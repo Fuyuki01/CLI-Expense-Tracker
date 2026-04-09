@@ -102,8 +102,3 @@ quit
 clear
 leave
 ```
-
----
-
-## Project URL
-https://roadmap.sh/projects/expense-tracker
