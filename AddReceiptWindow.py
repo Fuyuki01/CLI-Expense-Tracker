@@ -13,6 +13,7 @@ class AddReceiptWindow(QWidget):
     def initUI(self):
         # Add reciept
         self.date_box = QDateEdit()
+        self.date_box.setCalendarPopup(True)
         self.date_box.setDate(QDate.currentDate())
         self.amount = QLineEdit() 
         self.description = QLineEdit() 
@@ -27,7 +28,7 @@ class AddReceiptWindow(QWidget):
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
     def setup_layout(self):
-        layout = QVBoxLayout()
+        mainLayout = QVBoxLayout()
         row1 = QHBoxLayout()
         row2 = QHBoxLayout()
         row3 = QHBoxLayout()
@@ -47,10 +48,10 @@ class AddReceiptWindow(QWidget):
         row3.addWidget(self.btn_add)
         row3.addWidget(self.btn_delete)
 
-        layout.addLayout(row1)
-        layout.addLayout(row2)
-        layout.addLayout(row3)
-        layout.addWidget(self.table)
+        mainLayout.addLayout(row1)
+        mainLayout.addLayout(row2)
+        mainLayout.addLayout(row3)
+        mainLayout.addWidget(self.table)
 
-        self.setLayout(layout)
+        self.setLayout(mainLayout)
 

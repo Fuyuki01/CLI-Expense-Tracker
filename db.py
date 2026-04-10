@@ -15,7 +15,7 @@ def initialize_db():
     )
     """)
 
-    conn.commit
-    con.close
+    connection.commit
+    connection.close
 
 

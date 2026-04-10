@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, 
-                             QDateEdit, QComboBox, QLineEdit, QTableWidget)
+                            QStackedWidget)
 from PyQt5.QtCore import QSize, Qt, QDate
 from PyQt5.QtGui import QPalette, QColor
 from PyQt5 import QtGui, QtCore
-import AddReceiptWindow
+import AddReceiptWindow, HistoryWindowrea
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -16,11 +16,10 @@ class MainWindow(QMainWindow):
 
 
         self.initUI()
-        
-        self.receipt_Window = AddReceiptWindow.AddReceiptWindow()
-        self.setCentralWidget(self.receipt_Window)
+        self.initPageStack()
 
         self.top_bar_buttons[0].clicked.connect(self.add_receipt_button)
+        self.top_bar_buttons[1].clicked.connect(self.history_button)
 
     def initUI(self):
         self.mainLayout = QVBoxLayout()
@@ -50,9 +49,23 @@ class MainWindow(QMainWindow):
         self.widget = QWidget()
         self.widget.setLayout(self.mainLayout)
         self.setMenuWidget(self.widget)
+
+    def initPageStack(self):
+        self.stack = QStackedWidget()
+        
+        self.receiptPage = AddReceiptWindow.AddReceiptWindow()
+        self.historyPage = HistoryWindow.HistoryWindow()
+
+        self.stack.addWidget(self.receiptPage)
+        self.stack.addWidget(self.historyPage)
+
+        self.setCentralWidget(self.stack)
     
     def add_receipt_button(self):
-        self.setCentralWidget(self.receipt_Window)
+        self.stack.setCurrentWidget(self.receiptPage)
+
+    def history_button(self):
+        self.stack.setCurrentWidget(self.historyPage)
 
 # self.top_Bar.setSpacing(20)
 # self.top_Bar.setContentsMargins(5, 20, 0, 500)
